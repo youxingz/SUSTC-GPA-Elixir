@@ -7,10 +7,6 @@ defmodule Core.JwxtExtractor.Back do
 
   @term_url "http://jwxt.sustc.edu.cn/jsxsd/kscj/cjcx_list"
 
-  def h do
-    crawler("11610503", "074926")
-  end
-
   def crawler(uid, password) do
     {:ok, cookie} =
       CASConnector.obtain_session_id(uid, password)

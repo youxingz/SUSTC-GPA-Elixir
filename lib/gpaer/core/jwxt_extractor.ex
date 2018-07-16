@@ -7,11 +7,8 @@ defmodule Core.JwxtExtractor do
 
   @term_url "http://jwxt.sustc.edu.cn/jsxsd/kscj/cjcx_list"
 
-  def h do
-    crawler("11610503", "074926")
-  end
-
   def crawler(uid, password) do
+    IO.inspect("uid: #{uid}")
     {:ok, cookie} =
       CASConnector.obtain_session_id(uid, password)
     # uid
@@ -32,7 +29,7 @@ defmodule Core.JwxtExtractor do
     |> Enum.group_by(fn course -> # 组成 date, list 形式
       course.course_date
     end)
-    |> IO.inspect
+    # |> IO.inspect
     |> Enum.map(fn {date, courses} ->
       %{
         date: date,
@@ -78,7 +75,7 @@ defmodule Core.JwxtExtractor do
           #case1 如果该课程修读了多遍，则找到课程最大分数，设定为有效课程
           course_max = course_list |> List.first
           if course_max.course_season_id ==  course.course_season_id do
-            IO.inspect("#{course.course_season_id}")
+            # IO.inspect("#{course.course_season_id}")
             course |> invoke_values(true)
           else
             #case2 如果该课程修读了多遍，且课程标志为 "缺考"、"违纪" 则设为有效课程
