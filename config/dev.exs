@@ -51,8 +51,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :gpaer, Gpaer.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "neo",
-  password: "",
+  username: "postgres",
+  password: "postgres",
   database: "gpaer_dev",
   hostname: "localhost",
   pool_size: 10

@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :gpaer, Gpaer.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "neo",
-  password: "",
+  username: "postgres",
+  password: "postgres",
   database: "gpaer_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
