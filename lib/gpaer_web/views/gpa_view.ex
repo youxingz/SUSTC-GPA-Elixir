@@ -1,6 +1,6 @@
 defmodule GpaerWeb.GpaView do
   use GpaerWeb, :view
-  alias GpaerWeb.GpaView
+  # alias GpaerWeb.GpaView
 
   def render("gpa.json", %{data: data}) do
     data

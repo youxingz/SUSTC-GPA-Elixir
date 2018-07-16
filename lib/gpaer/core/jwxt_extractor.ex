@@ -176,17 +176,6 @@ defmodule Core.JwxtExtractor do
     }
   end
 
-  defp flatten_list([nil], _date) do
-    nil
-  end
-
-  defp flatten_list(course_list, date) do
-    %{
-      "date": date,
-      "list": course_list
-    }
-  end
-
   @doc """
   crawler
   """
