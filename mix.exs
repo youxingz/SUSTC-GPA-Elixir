@@ -44,7 +44,8 @@ defmodule Gpaer.Mixfile do
       {:cowboy, "~> 1.0"},
       {:floki, "~> 0.20.0"},
       {:httpoison, "~> 1.0"},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:distillery, "~> 1.0"}
     ]
   end
 

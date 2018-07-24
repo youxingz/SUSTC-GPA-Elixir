@@ -276,6 +276,58 @@ defmodule Core.JwxtExtractor do
     }
   end
 
+  # [{"td", [], ["41"]},
+  #   {"td", [], ["2017-2018-1"]},
+  #   {"td", [{"align", "left"}], ["BIO206-15"]},
+  #   {"td", [{"align", "left"}], ["细胞生物学"]},
+  #   {"td", [{"style", " "}],
+  #    [{"a", [{"href", "javascript:JsMod('/jsxsd/kscj/pscj_list.do?xs0101id=11510055&jx0404id=201720181001090&zcj=84',700,500)"}], ["\r\n\t\t\tB\r\n\t\t\t"]}]},
+  #   {"td", [], ["4"]},
+  #   {"td", [], ["64"]},
+  #   {"td", [], []},
+  #   {"td", [], ["必修"]},
+  #   {"td", [], ["专业核心课"]},
+  #   {"td", [], []}]
+
+  def extract_course_item([
+    {"td", [], [index]},
+    {"td", [], [date]},
+    {"td", [{"align", "left"}], [course_id]},
+    {"td", [{"align", "left"}], [course_name]},
+    {"td", [{"style", " "}],
+     [
+       {"a",
+        [
+          {"href",
+          course_detail}
+        ], [course_level]}
+     ]},
+    {"td", [], [course_credit]},
+    {"td", [], [course_times]},
+    {"td", [], []},
+    {"td", [], [course_property]},
+    {"td", [], [course_nature]},
+    {"td", [], []}
+  ] = _course_list) do
+    %{
+      index: index,
+      course_date: date,
+      course_id: course_id,
+      course_name: course_name,
+      course_season_id: course_detail |> extract_course_season, # 课程唯一 id 标示
+      course_detail: course_detail |> extract_course_detail,
+      course_level: course_level |> extract_course_level,
+      course_credit: course_credit,
+      course_period: course_times,
+      course_method: "",
+      course_property: course_property,
+      course_nature: course_nature,
+      course_tag: "",
+      is_available: false
+    }
+  end
+
+
   defp extract_course_season(href) do
     {season_id, _} = href
                       |> String.split(["jx0404id=", "&zcj="])
