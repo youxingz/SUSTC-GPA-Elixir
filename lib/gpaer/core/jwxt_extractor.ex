@@ -201,6 +201,98 @@ defmodule Core.JwxtExtractor do
   end
 
   def extract_course_item([
+      {"td", [], [index]},
+      {"td", [], [date]},
+      {"td", [{"align", "left"}], [course_id]},
+      {"td", [{"align", "left"}], [course_name]},
+      {"td", [], [course_level]},
+      {"td", [], [course_credit]},
+      {"td", [], [course_times]},
+      {"td", [], [course_method]},
+      {"td", [], [course_property]},
+      {"td", [], [course_nature]},
+      {"td", [], [course_tag]}
+    ] = _course_list) do
+      %{
+        index: index,
+        course_date: date,
+        course_id: course_id,
+        course_name: course_name,
+        course_season_id: "unknow",
+        course_detail: "0",
+        course_level: course_level |> extract_course_level,
+        course_credit: course_credit,
+        course_period: course_times,
+        course_method: course_method,
+        course_property: course_property,
+        course_nature: course_nature,
+        course_tag: course_tag,
+        is_available: false
+      }
+  end
+
+  def extract_course_item([
+    {"td", [], [index]},
+    {"td", [], [date]},
+    {"td", [{"align", "left"}], [course_id]},
+    {"td", [{"align", "left"}], [course_name]},
+    {"td", [], [course_level]},
+    {"td", [], [course_credit]},
+    {"td", [], [course_times]},
+    {"td", [], [course_method]},
+    {"td", [], [course_property]},
+    {"td", [], [course_nature]},
+    {"td", [], []}
+  ] = _course_list) do
+    %{
+      index: index,
+      course_date: date,
+      course_id: course_id,
+      course_name: course_name,
+      course_season_id: "unknow",
+      course_detail: "0",
+      course_level: course_level |> extract_course_level,
+      course_credit: course_credit,
+      course_period: course_times,
+      course_method: course_method,
+      course_property: course_property,
+      course_nature: course_nature,
+      course_tag: "",
+      is_available: false
+    }
+end
+  def extract_course_item([
+      {"td", [], [index]},
+      {"td", [], [date]},
+      {"td", [{"align", "left"}], [course_id]},
+      {"td", [{"align", "left"}], [course_name]},
+      {"td", [], [course_level]},
+      {"td", [], [course_credit]},
+      {"td", [], [course_times]},
+      {"td", [], []},
+      {"td", [], [course_property]},
+      {"td", [], [course_nature]},
+      {"td", [], []}
+    ] = _course_list) do
+      %{
+        index: index,
+        course_date: date,
+        course_id: course_id,
+        course_name: course_name,
+        course_season_id: "unknow",
+        course_detail: "0",
+        course_level: course_level |> extract_course_level,
+        course_credit: course_credit,
+        course_period: course_times,
+        course_method: "",
+        course_property: course_property,
+        course_nature: course_nature,
+        course_tag: "",
+        is_available: false
+      }
+  end
+
+  def extract_course_item([
     {"td", [], [index]},
     {"td", [], [date]},
     {"td", [{"align", "left"}], [course_id]},
